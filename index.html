@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Payroll Calculator</title>
+  </head>
+  <body>
+    <h1>Malaysian Payroll Calculator EPF | SOCSO | TAX</h1>
+    <div class="ip">
+      <label for="basic">Basic Salary + Fixed Allowance (RM):</label>
+      <input
+        type="number"
+        name="basic_salary"
+        id="basic"
+        maxlength="8"
+        placeholder="RM"
+        onchange= {e=>console.log(e.target.value)}
+      />
+      <!-- <label for="fix_allw">Fixed Allowance:</label>
+      <input
+        type="number"
+        name="fixed_allowance"
+        id="fx_allw"
+        maxlength="8"
+        placeholder="RM"
+      /> -->
+      <label for="ot">Total Overtime (RM):</label>
+      <input
+        type="number"
+        name="Total Overtime"
+        id="ot"
+        maxlength="8"
+        placeholder="RM"
+      />
+      <button type="submit">Calculate!</button>
+    </div>
+    <table width="50%" class="table">
+      <tr>
+        <th></th>
+        <th>Employee</th>
+        <th>Employer</th>
+        <th>Sub-Total</th>
+      </tr>
+      <tr>
+        <td>EPF</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>SOCSO</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>EIS</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>TAX/LHDN</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>ZAKAT</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>DEDUCTIONS</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>TOTAL:</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </body>
+</html>
