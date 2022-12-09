@@ -1,9 +1,14 @@
 import './App.css';
+import StatutoryTable from './components/StatutoryTable';
+import InputBasic from "./components/InputBasic";
+import Navbar from './components/Navbar'
 
 function App() {
   return (
     <div className="App">
-      pAYROLL
+      <Navbar/>
+      <InputBasic/>
+      <StatutoryTable/>
     </div>
   );
 }
