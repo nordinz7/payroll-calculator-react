@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function StatutoryTable(){
-
+export default function StatutoryTable(props){
+  console.log(props)
     return (
         <table className="statutory-table">
            <caption>Statutory Contribution & Deductions</caption>
@@ -22,8 +22,8 @@ export default function StatutoryTable(){
       </tr>
       <tr>
         <td>SOCSO</td>
-        <td></td>
-        <td></td>
+        <td>{props.socsodeductions[0].employee}</td>
+        <td>{props.socsodeductions[0].employer}</td>
         <td></td>
       </tr>
       <tr>
