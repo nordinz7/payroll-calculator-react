@@ -4,6 +4,7 @@ import InputBasic from "./components/InputBasic";
 import Navbar from './components/Navbar'
 import React, {useState, useEffect} from 'react'
 import socso from './data/socso.js';
+import eis from './data/eis'
 
 
 
@@ -12,10 +13,11 @@ function App() {
   const [ot,setOt]=useState(0)
   const [total,setTotal]=useState(0)
   const [socsoTable,setSocsoTable]=useState({})
+  const [eisTable,setEisTable]=useState({})
   
   function getData(){
     console.log('clicked Calculate!!!')
-  }
+  
   
   function getSocso(salary=total){
     console.log('getsocso: ',salary)
@@ -32,12 +34,13 @@ function App() {
           return bDiff < aDiff ? b : a;
       }
      
-  });
+      });
   console.log('closest',closest);
   console.log( socso.filter(item=>item.wage===closest));
   setSocsoTable(prev=>socso.filter(item=>item.wage===closest))
 
   }
+}
   useEffect(()=>{
     // console.log(`Basic Salary: ${basic}, OT: ${ot}, Total: ${total}`);
     setTotal(Number(basic)+Number(ot))
@@ -47,7 +50,7 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
-      <InputBasic  calculate={getSocso} salary={setTotal} setbasic={setBasic} setot={setOt}/>
+      <InputBasic  calculate={getData} salary={setTotal} setbasic={setBasic} setot={setOt}/>
       <StatutoryTable socsodeductions={socsoTable}/>
     </div>
   );
