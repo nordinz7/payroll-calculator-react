@@ -1,10 +1,13 @@
 import React from 'react'
 
 export default function StatutoryTable(props){
-  console.log(props)
+  const socso = !props.socsodeductions?0:props.socsodeductions[0];
+  const eis = !props.eisdeductions?0:props.eisdeductions[0];
+  const epf = !props.epfdeductions?0:props.epfdeductions[0];
+  
     return (
-        <table className="statutory-table">
-           <caption>Statutory Contribution & Deductions</caption>
+    <table className="statutory-table">
+      <caption>Statutory Contribution & Deductions</caption>
       <thead>
       <tr>
         <th></th>
@@ -16,20 +19,20 @@ export default function StatutoryTable(props){
     <tbody>
       <tr>
         <td>EPF</td>
-        <td></td>
-        <td></td>
+        <td>{epf.employee}</td>
+        <td>{epf.employer}</td>
         <td></td>
       </tr>
       <tr>
         <td>SOCSO</td>
-        <td>{props.socsodeductions[0].employee}</td>
-        <td>{props.socsodeductions[0].employer}</td>
+        <td>{socso.employee}</td>
+        <td>{socso.employer}</td>
         <td></td>
       </tr>
       <tr>
         <td>EIS</td>
-        <td></td>
-        <td></td>
+        <td>{eis.employee}</td>
+        <td>{eis.employer}</td>
         <td></td>
       </tr>
       <tr>
@@ -59,4 +62,5 @@ export default function StatutoryTable(props){
     </tbody>
     </table>
     )
-}
+  
+};
