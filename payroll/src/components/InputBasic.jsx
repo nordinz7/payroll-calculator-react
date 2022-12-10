@@ -1,6 +1,9 @@
-import React ,{Fragment} from 'react'
+import React ,{Fragment,useState,useEffect} from 'react'
 
 export default function InputBasic(props){
+  const [basic,setBasic]=useState(0)
+  const [ot,setOt]=useState(0)
+  useEffect(()=>console.log(`Basic Salary: ${basic}, OT: ${ot}`),[basic,ot])
     return(
         <Fragment>
       <label htmlFor="basic">Basic Salary + Fixed Allowance (RM):</label>
@@ -11,7 +14,7 @@ export default function InputBasic(props){
         id="basic"
         maxLength="8"
         placeholder="RM"
-        onChange= {e=>props.salary(e.target.value)}
+        onChange= {e=>setBasic(e.target.value)}
       />
       <label htmlFor="ot">Total Overtime (RM):</label>
       <input
@@ -21,7 +24,7 @@ export default function InputBasic(props){
         id="ot"
         maxLength="8"
         placeholder="RM"
-        onChange= {e=>props.ot(e.target.value)}
+        onChange= {e=>setOt(e.target.value)}
       />
       <button className="btn_cal" type="submit" onClick={()=>props.calculate()}>Calculate!</button>
       </Fragment>
