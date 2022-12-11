@@ -64,7 +64,7 @@ function App() {
           setEisTable(prev=>eis.filter(item=>item.wage===closest))
        }
 
-       function getEpf(salary=total){
+       function getEpf(salary=basic){
         console.log('getepf: ',salary)
         const salaryLimit =  salary
         const wages =epf.map(i=>i.wage)
