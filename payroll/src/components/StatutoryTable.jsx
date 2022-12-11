@@ -6,10 +6,10 @@ export default function StatutoryTable(props){
   const epf = !props.epfdeductions?0:props.epfdeductions[0];
   
     return (
-    <table className="statutory-table">
-      <caption>Statutory Contribution & Deductions</caption>
+    <table className="styled-table">
+      <caption className='title-table'>Statutory Contribution & Deductions</caption>
       <thead>
-      <tr>
+      <tr >
         <th></th>
         <th>Employee</th>
         <th>Employer</th>
@@ -21,19 +21,19 @@ export default function StatutoryTable(props){
         <td>EPF</td>
         <td>{epf.employee}</td>
         <td>{epf.employer}</td>
-        <td></td>
+        <td>{epf.employee+epf.employer}</td>
       </tr>
       <tr>
         <td>SOCSO</td>
         <td>{socso.employee}</td>
         <td>{socso.employer}</td>
-        <td></td>
+        <td>{socso.employee+socso.employer}</td>
       </tr>
       <tr>
         <td>EIS</td>
         <td>{eis.employee}</td>
         <td>{eis.employer}</td>
-        <td></td>
+        <td>{eis.employee+eis.employer}</td>
       </tr>
       <tr>
         <td>TAX/LHDN</td>
@@ -53,10 +53,10 @@ export default function StatutoryTable(props){
         <td></td>
         <td></td>
       </tr>
-      <tr>
+      <tr className='active-row'>
         <td>TOTAL:</td>
-        <td></td>
-        <td></td>
+        <td>{Number(epf.employee+socso.employee+eis.employee).toFixed(2)}</td>
+        <td>{Number(epf.employer+socso.employer+eis.employer).toFixed(2)}</td>
         <td></td>
       </tr>
     </tbody>
