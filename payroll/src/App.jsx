@@ -68,16 +68,9 @@ function App() {
         console.log('getepf: ',salary)
         const salaryLimit =  salary
         const wages =epf.map(i=>i.wage)
+        console.log(epf.map(i=>Math.abs(i.wage-salaryLimit)))
         const closest = wages.reduce((a, b) => {
-          let aDiff = Math.abs(a - salaryLimit);
-          let bDiff = Math.abs(b - salaryLimit);
-      
-          if (aDiff === bDiff) {
-              // Choose largest vs smallest (> vs <)
-              return a > b ? a : b;
-          } else {
-              return bDiff < aDiff ? b : a;
-          }
+          return salaryLimit >= a && salaryLimit <b ? a : b;
         });
         console.log('closest epf:',closest);
         console.log( epf.filter(item=>item.wage===closest));
