@@ -83,3 +83,9 @@ input[type=number] {
   font-weight: bold;
 }
 
+.info{
+  width: 50%;
+  padding: 20px;
+  font-size: small;
+  font-weight: bold;
+}

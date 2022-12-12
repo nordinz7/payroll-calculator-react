@@ -16,12 +16,14 @@ function App() {
   const [socsoTable,setSocsoTable]=useState(0)
   const [eisTable,setEisTable]=useState(0)
   const [epfTable,setEpfTable]=useState(0)
+  const [showStatutoryTable,setshowStatutoryTable]=useState(false)
   
   function getData(){
     console.log('clicked Calculate!!!')
     getSocso();
     getEis();
     getEpf();
+    setshowStatutoryTable(prev=>!prev)
   }
 
   function getSocso(salary=total){
@@ -88,7 +90,8 @@ function App() {
     <div className="App">
       <Navbar/>
       <InputBasic  calculate={getData} salary={total} setbasic={setBasic} setot={setOt}/>
-      <StatutoryTable socsodeductions={socsoTable} eisdeductions={eisTable} epfdeductions={epfTable}/>
+      { showStatutoryTable && total>0 && <StatutoryTable socsodeductions={socsoTable} eisdeductions={eisTable} epfdeductions={epfTable}/>}
+      <p className='info'>This App is still at development stage. For now, this app calculation is confined to EPF (11%) First Category, Socso First Category (Invalidity and Injury Scheme) and EIS contribution</p>
     </div>
   );
 }
