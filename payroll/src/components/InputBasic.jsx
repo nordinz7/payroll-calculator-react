@@ -24,6 +24,7 @@ export default function InputBasic(props){
         placeholder="RM"
         onChange= {e=>props.setot(e.target.value)}
       />
+      {props.salary>0 && <p className='total_salary'>Total Amount (RM):{props.salary}</p>}
       <button className="btn_cal" type="submit" onClick={()=>props.calculate()}>Calculate!</button>
       </Fragment>
     )

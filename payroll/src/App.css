@@ -10,16 +10,16 @@
   margin: 5px;
 }
 
-.input_basic,.input_ot{
+.input_basic,.input_ot,.total_salary{
   width: 15%;
   height: 2rem;
   padding: 10px;
   border-radius: 5px;
+  font-size: large;
 }
 
 input[type=number] {
   -moz-appearance: textfield;
-  font-size: large;
 }
 
 .btn_cal{

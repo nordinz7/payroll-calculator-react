@@ -87,7 +87,7 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
-      <InputBasic  calculate={getData} salary={setTotal} setbasic={setBasic} setot={setOt}/>
+      <InputBasic  calculate={getData} salary={total} setbasic={setBasic} setot={setOt}/>
       <StatutoryTable socsodeductions={socsoTable} eisdeductions={eisTable} epfdeductions={epfTable}/>
     </div>
   );
