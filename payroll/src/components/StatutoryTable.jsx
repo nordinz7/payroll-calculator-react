@@ -19,9 +19,9 @@ export default function StatutoryTable(props){
     <tbody>
       <tr>
         <td>EPF</td>
-        <td>{epf.employee}</td>
-        <td>{epf.employer}</td>
-        <td>{epf.employee+epf.employer}</td>
+        <td>{epf && epf.employee}</td>
+        <td>{epf && epf.employer}</td>
+        <td>{epf && epf.employee+epf.employer}</td>
       </tr>
       <tr>
         <td>SOCSO</td>
@@ -55,9 +55,9 @@ export default function StatutoryTable(props){
       </tr>
       <tr className='active-row'>
         <td>TOTAL:</td>
-        <td>{Number(epf.employee+socso.employee+eis.employee).toFixed(2)}</td>
-        <td>{Number(epf.employer+socso.employer+eis.employer).toFixed(2)}</td>
-        <td></td>
+        <td>{Number((epf?epf.employee:0)+socso.employee+eis.employee).toFixed(2)}</td>
+        <td>{Number((epf?epf.employer:0)+socso.employer+eis.employer).toFixed(2)}</td>
+        <td>{Number((epf?epf.employee:0)+socso.employee+eis.employee + (epf?epf.employer:0)+socso.employer+eis.employer).toFixed(2)}</td>
       </tr>
     </tbody>
     </table>

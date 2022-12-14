@@ -27,13 +27,14 @@ function App() {
   
   function getData(){
     console.log('clicked Calculate!!!')
-    getSocso();
-    getEis();
-    getEpf();
-    setshowStatutoryTable(prev=>!prev);
-    setEmployeePortion(prev=>getTotalEmployeePortion());
-    console.log(total, employeePortion)
-  }
+    if (total>0){
+       getSocso();
+       getEis();
+       getEpf();
+       getTotalEmployeePortion()
+       setshowStatutoryTable(prev=>!prev);
+    };
+  };
 
         function getSocso(salary=total){
             console.log('getsocso: ',salary)
@@ -77,6 +78,9 @@ function App() {
 
        function getEpf(salary=basic){
         console.log('getepf: ',salary)
+        if (salary<=0){
+          return;
+        }
         const salaryLimit =  salary
         const wages =epf.map(i=>i.wage)
         console.log(epf.map(i=>Math.abs(i.wage-salaryLimit)))
@@ -89,13 +93,14 @@ function App() {
         setEpfTable(prev=> epfExceedLimit)
      }
 
-     function getTotalEmployeePortion(){
+      function getTotalEmployeePortion(){
       console.log('getTotalStatutoryAmount')
         if (epfTable!==0){
         const arrObjStatutory = [epfTable[0],eisTable[0],socsoTable[0]];
         console.log(arrObjStatutory);
-        return arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr)
-      }
+        console.log(arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr));
+        setEmployeePortion(prev=>arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr))
+      } 
      }
 
 
