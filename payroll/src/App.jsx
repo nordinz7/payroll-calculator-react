@@ -17,16 +17,26 @@ function App() {
   const [eisTable,setEisTable]=useState(0)
   const [epfTable,setEpfTable]=useState(0)
   const [showStatutoryTable,setshowStatutoryTable]=useState(false)
+  const [employeePortion,setEmployeePortion]=useState(0)
+
+  useEffect(()=>{
+    // console.log(`Basic Salary: ${basic}, OT: ${ot}, Total: ${total}`);
+    setTotal(Number(basic)+Number(ot))
+    }
+    ,[basic,ot,total])
   
   function getData(){
     console.log('clicked Calculate!!!')
-    getSocso();
-    getEis();
-    getEpf();
-    setshowStatutoryTable(prev=>!prev)
-  }
+    if (total>0){
+       getSocso();
+       getEis();
+       getEpf();
+       getTotalEmployeePortion()
+       setshowStatutoryTable(prev=>!prev);
+    };
+  };
 
-  function getSocso(salary=total){
+        function getSocso(salary=total){
             console.log('getsocso: ',salary)
             const salaryLimit = salary>5000 ? 5000: salary
             const wages =socso.map(i=>i.wage)
@@ -68,6 +78,9 @@ function App() {
 
        function getEpf(salary=basic){
         console.log('getepf: ',salary)
+        if (salary<=0){
+          return;
+        }
         const salaryLimit =  salary
         const wages =epf.map(i=>i.wage)
         console.log(epf.map(i=>Math.abs(i.wage-salaryLimit)))
@@ -80,17 +93,23 @@ function App() {
         setEpfTable(prev=> epfExceedLimit)
      }
 
-  useEffect(()=>{
-    // console.log(`Basic Salary: ${basic}, OT: ${ot}, Total: ${total}`);
-    setTotal(Number(basic)+Number(ot))
-    }
-    ,[basic,ot,total])
+      function getTotalEmployeePortion(){
+      console.log('getTotalStatutoryAmount')
+        if (epfTable!==0){
+        const arrObjStatutory = [epfTable[0],eisTable[0],socsoTable[0]];
+        console.log(arrObjStatutory);
+        console.log(arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr));
+        setEmployeePortion(prev=>arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr))
+      } 
+     }
+
 
   return (
     <div className="App">
       <Navbar/>
       <InputBasic  calculate={getData} salary={total} setbasic={setBasic} setot={setOt}/>
       { showStatutoryTable && total>0 && <StatutoryTable socsodeductions={socsoTable} eisdeductions={eisTable} epfdeductions={epfTable}/>}
+      {showStatutoryTable && total>0 && <p className='nett_pay'>Nett Pay (RM): {total-employeePortion}</p>}
       <p className='info'>This App is still at development stage. For now, this app calculation is confined to EPF (11%) First Category, Socso First Category (Invalidity and Injury Scheme) and EIS contribution</p>
     </div>
   );
