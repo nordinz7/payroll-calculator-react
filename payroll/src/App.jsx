@@ -21,19 +21,23 @@ function App() {
 
   const employeePortion = useMemo(function getTotalEmployeePortion(){
     console.log('getTotalEmployeePortion')
-      if (epfTable!==0){
-      const arrObjStatutory = [epfTable[0],eisTable[0],socsoTable[0]];
-      console.log(arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr));
+    if (epfTable[0]){
+      const arrObjStatutory = [epfTable[0],eisTable[0],socsoTable[0]]
+      console.log(arrObjStatutory)
       return arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr)
       // setEmployeePortion(prev=>arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr))
-    } 
+    } else if (ot>0){
+      const arrObjStatutory = [eisTable[0],socsoTable[0]]
+      console.log(arrObjStatutory)
+      return arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr)
+    }
    // eslint-disable-next-line react-hooks/exhaustive-deps
    },[showStatutoryTable]) 
 
 
   useEffect(()=>{
     // console.log(`Basic Salary: ${basic}, OT: ${ot}, Total: ${total}`);
-        setTotal(prev=>Number(basic)+Number(ot));
+        setTotal(prev=>(Number(basic)+Number(ot)));
         setshowStatutoryTable(prev=>false);
         setEpfTable(prev=>0)
         setSocsoTable(prev=>0)
@@ -95,7 +99,7 @@ function App() {
        function getEpf(salary=basic){
         console.log('getepf: ',salary)
         if (salary<=0){
-          return;
+          return 0;
         }
         const salaryLimit =  salary
         const wages =epf.map(i=>i.wage)
