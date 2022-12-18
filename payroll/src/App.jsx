@@ -21,9 +21,10 @@ function App() {
 
   useEffect(()=>{
     // console.log(`Basic Salary: ${basic}, OT: ${ot}, Total: ${total}`);
-    setTotal(Number(basic)+Number(ot))
+    setTotal(prev=>Number(basic)+Number(ot));
+    getTotalEmployeePortion();
     }
-    ,[basic,ot,total])
+    ,[basic,ot,showStatutoryTable])
   
   function getData(){
     console.log('clicked Calculate!!!')
@@ -31,7 +32,6 @@ function App() {
        getSocso();
        getEis();
        getEpf();
-       getTotalEmployeePortion()
        setshowStatutoryTable(prev=>!prev);
     };
   };
