@@ -2,7 +2,7 @@ import './App.css';
 import StatutoryTable from './components/StatutoryTable';
 import InputBasic from "./components/InputBasic";
 import Navbar from './components/Navbar'
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useMemo} from 'react'
 import socso from './data/socso.js';
 import eis from './data/eis'
 import epf from './data/epf'
@@ -17,14 +17,24 @@ function App() {
   const [eisTable,setEisTable]=useState(0)
   const [epfTable,setEpfTable]=useState(0)
   const [showStatutoryTable,setshowStatutoryTable]=useState(false)
-  const [employeePortion,setEmployeePortion]=useState(0)
+  // const [employeePortion,setEmployeePortion]=useState(0)
+
+  const employeePortion = useMemo(function getTotalEmployeePortion(){
+    console.log('getTotalEmployeePortion')
+      if (epfTable!==0){
+      const arrObjStatutory = [epfTable[0],eisTable[0],socsoTable[0]];
+      console.log(arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr));
+      return arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr)
+      // setEmployeePortion(prev=>arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr))
+    } 
+   },[showStatutoryTable]) 
+
 
   useEffect(()=>{
     // console.log(`Basic Salary: ${basic}, OT: ${ot}, Total: ${total}`);
     setTotal(prev=>Number(basic)+Number(ot));
-    getTotalEmployeePortion();
     }
-    ,[basic,ot,showStatutoryTable])
+    ,[basic,ot])
   
   function getData(){
     console.log('clicked Calculate!!!')
@@ -93,16 +103,7 @@ function App() {
         setEpfTable(prev=> epfExceedLimit)
      }
 
-      function getTotalEmployeePortion(){
-      console.log('getTotalStatutoryAmount')
-        if (epfTable!==0){
-        const arrObjStatutory = [epfTable[0],eisTable[0],socsoTable[0]];
-        console.log(arrObjStatutory);
-        console.log(arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr));
-        setEmployeePortion(prev=>arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr))
-      } 
-     }
-
+      
 
   return (
     <div className="App">
