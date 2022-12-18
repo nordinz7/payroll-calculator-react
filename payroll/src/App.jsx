@@ -27,13 +27,19 @@ function App() {
       return arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr)
       // setEmployeePortion(prev=>arrObjStatutory.map(i=>i.employee).reduce((acc,curr)=>acc+curr))
     } 
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    },[showStatutoryTable]) 
 
 
   useEffect(()=>{
     // console.log(`Basic Salary: ${basic}, OT: ${ot}, Total: ${total}`);
-    setTotal(prev=>Number(basic)+Number(ot));
-    }
+        setTotal(prev=>Number(basic)+Number(ot));
+        setshowStatutoryTable(prev=>false);
+        setEpfTable(prev=>0)
+        setSocsoTable(prev=>0)
+        setEisTable(prev=>0)
+
+  }
     ,[basic,ot])
   
   function getData(){
